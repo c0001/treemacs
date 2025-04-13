@@ -111,8 +111,8 @@ To be called whenever a project or workspace changes."
   (declare (side-effect-free t))
   (-when-let (project (project-current))
     (if (fboundp 'project-root)
-        (-> project (project-root) (file-truename) (treemacs-canonical-path))
-      (-> project (cdr) (file-truename) (treemacs-canonical-path)))))
+        (-> project (project-root) (treemacs-canonical-path))
+      (-> project (cdr) (treemacs-canonical-path)))))
 
 (defun treemacs--current-directory-project-function ()
   "Find the current working directory."
@@ -481,7 +481,7 @@ NAME: String"
          (added-in-workspace (treemacs-current-workspace)))
      (treemacs-return-if (not (file-readable-p path))
        `(invalid-path "Path is not readable does not exist."))
-     (setq path (-> path (file-truename) (treemacs-canonical-path)))
+     (setq path (-> path (treemacs-canonical-path)))
      (-when-let (project (treemacs--find-project-for-path path))
        (treemacs-return `(duplicate-project ,project)))
      (treemacs-return-if (treemacs--is-name-invalid? name)

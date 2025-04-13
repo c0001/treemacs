@@ -66,7 +66,7 @@ the project's root directory."
 This version will read a directory based on the current project root instead of
 the current dir."
   (when (treemacs-workspace->is-empty?)
-    (file-truename
+    (progn
      (read-directory-name "Project root: "
                           (condition-case _
                               (projectile-project-root)
@@ -75,7 +75,7 @@ the current dir."
 (defun treemacs--projectile-current-user-project-function ()
   "Get the current projectile project root."
   (declare (side-effect-free t))
-  (-some-> (projectile-project-root) (file-truename) (treemacs-canonical-path)))
+  (-some-> (projectile-project-root) (treemacs-canonical-path)))
 
 (defun treemacs-projectile--add-file-to-projectile-cache (path)
   "Add created file PATH to projectile's cache."

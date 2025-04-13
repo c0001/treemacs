@@ -196,7 +196,7 @@ GIT-FUTURE: Pfuture"
 
 (defun treemacs--git-status-process-simple (path)
   "Start a simple git status process for files under PATH."
-  (let* ((default-directory (file-truename path))
+  (let* ((default-directory (file-name-as-directory (directory-file-name path)))
          (process-environment (cons "GIT_OPTIONAL_LOCKS=0" process-environment))
          (future (pfuture-new treemacs-git-executable "status" "--porcelain" "--ignored=matching" "-z" ".")))
     (process-put future 'default-directory default-directory)

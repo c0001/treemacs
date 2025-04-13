@@ -34,6 +34,7 @@
 (require 'treemacs-workspaces)
 (require 'treemacs-persistence)
 (require 'treemacs-logging)
+(require 'eemacs-treemacs-defs)
 
 (eval-when-compile
   (require 'cl-lib)
@@ -793,15 +794,18 @@ auto-selected name already exists."
      (treemacs-pulse-on-failure "Name '%s' is invalid."
        (propertize name 'face 'font-lock-string-face)))
     (`(duplicate-project ,duplicate)
+     (eemacs-treemacs/func/treemacs-maybe-init)
      (goto-char (treemacs-project->position duplicate))
      (treemacs-pulse-on-failure "A project for '%s' already exists. Projects may not overlap."
        (propertize (treemacs-project->path duplicate) 'face 'font-lock-string-face)))
     (`(includes-project ,project)
+     (eemacs-treemacs/func/treemacs-maybe-init)
      (goto-char (treemacs-project->position project))
      (treemacs-pulse-on-failure "Project '%s' is included in '%s'. Projects may not overlap."
        (propertize (treemacs-project->name project) 'face 'font-lock-type-face)
        (propertize path 'face 'font-lock-string-face)))
     (`(duplicate-name ,duplicate)
+     (eemacs-treemacs/func/treemacs-maybe-init)
      (goto-char (treemacs-project->position duplicate))
      (treemacs-pulse-on-failure "A project with the name %s already exists."
        (propertize (treemacs-project->name duplicate) 'face 'font-lock-type-face))))

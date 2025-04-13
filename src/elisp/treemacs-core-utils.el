@@ -1121,7 +1121,7 @@ This function is extracted here specifically so that treemacs-projectile can
 overwrite it so as to present the project root instead of the current dir as the
 first choice."
   (when (treemacs-workspace->is-empty?)
-    (file-truename (read-directory-name "Project root: "))))
+    (progn (read-directory-name "Project root: "))))
 
 (defun treemacs--sort-value-selection ()
   "Interactive selection for a new `treemacs-sorting' value.
