@@ -279,7 +279,7 @@ button type on every call."
   (declare (side-effect-free t))
   (inline-letevals (button prop)
     (inline-quote
-     (get-text-property ,button ,prop))))
+     (eemacs-treemacs/func/get-text-property ,button ,prop))))
 
 (define-inline treemacs-button-start (button)
   "Return the start position of BUTTON.
